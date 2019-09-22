@@ -5,17 +5,15 @@ import Person from './Person/Person'
 class App extends Component {
   state ={
     persons:[
-      {name:'Max', age: 28},
-      {name:'Manu', age: 29},
-      {name:'Stephanie', age: 26}
+      {id: 'wertw', name:'Max', age: 28},
+      {id: 'dsfgs', name:'Manu', age: 29},
+      {id: 'fdgjs', name:'Stephanie', age: 26}
     ],
     otherState : 'some other value',
     showPersons:false
   }
 
   switchNameHandler = (newName) => {
-    //console.log('Was clicked!');
-    //dont do this this.state.persons[0].name = 'Maximliian';
     this.setState({persons: [
       {name: newName, age: 28},
       {name:'Manu', age: 29},
@@ -23,14 +21,36 @@ class App extends Component {
     ]})
   }
 
-  nameChangeHandler = (event) => {
-    //console.log('Was clicked!');
-    //dont do this this.state.persons[0].name = 'Maximliian';
-    this.setState({persons: [
-      {name: 'Max', age: 28},
-      {name: 'Manu', age: 29},
-      {name:event.target.value, age: 26}
-    ]})
+  nameChangeHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+     return p.id === id;
+    });
+
+    // const person = Object.assign({}, this.state.persons[personIndex]);
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    //this.setState({persons: [
+    //  {id: 'wertw', name: 'Max', age: 28},
+    //  {id: 'dsfgs', name: 'Manu', age: 29},
+    //  {id: 'fdgjs', name:event.target.value, age: 26}
+    //]})
+
+    this.setState({persons: persons});
+  }
+
+  deletePersonHandler = (personIndex) =>{
+      //const persons = this.state.persons;
+      //const persons = this.state.persons.slice();
+      const persons = [...this.state.persons];
+      persons.splice(personIndex, 1);
+      this.setState({persons:persons});
   }
 
   tooglePersonHandler = () =>{
@@ -52,47 +72,25 @@ class App extends Component {
 
       persons = (
         <div>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age} />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age} />
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-          click={this.switchNameHandler.bind(this, 'Max!')}
-          changed={this.nameChangeHandler}>May hoby racing</Person>
+          {this.state.persons.map((person, index) =>{
+            return <Person
+            click={() => this.deletePersonHandler(index)}
+            name={person.name}
+            age={person.age} 
+            key={person.id}
+            changed={(event) => this.nameChangeHandler(event, person.id)}/>
+
+          })}
+        
       </div> 
       )
 
     }
     return (
       
-      //prop used
-      // <div className="App">
-      //   <h1>Hi, I'm React App</h1>
-      //   <p>This is reallty working?</p>
-      //   <button>Switch Name</button>
-      //   <Person name="Max" age="28"/>
-      //   <Person name="Manu" age="29"/>
-      //   <Person name="Stephanie" age="26">May hoby racing</Person>
-      // </div>
-
-      //state used
-      // <div className="App">
-      //   <h1>Hi, I'm React App</h1>
-      //   <p>This is reallty working?</p>
-      //   <button >Switch Name</button>
-      //   <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-      //   <Person name={this.state.persons[1].name} age={this.state.persons[1].age}/>
-      //   <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>May hoby racing</Person>
-      // </div>
-      
       <div className="App">
         <h1>Hi, I'm React App</h1>
         <p>This is reallty working?</p>
-        {/* <button onClick={this.switchNameHandler.bind(this,'Maximillian')}>Switch Name</button> */}
         <button 
           style={style} 
           onClick={this.tooglePersonHandler}>Toogle Person</button>
@@ -100,7 +98,7 @@ class App extends Component {
         
       </div>
     );
-    //return React.createElement('div', null, React.createElement('h1', {className:"App"}, 'Hi, I\'m React App'))
+    
   }
 }
 
