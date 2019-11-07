@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classes from './App.css';
+
 import Person from './Person/Person'
 
 class App extends Component {
@@ -65,7 +66,9 @@ class App extends Component {
       font: 'white',
       border: '1px solid blue',
       padding: '8px',
+
       
+
 
     };
 
@@ -88,7 +91,9 @@ class App extends Component {
       )
 
       style.backgroundColor = 'red';
+
     
+
 
     }
 
@@ -106,8 +111,10 @@ class App extends Component {
 
     return (
 
+
     
         <div className={classes.App}>
+
           <h1>Hi, I'm React App</h1>
           <p className={Assignedclasses.join(' ')}>This is reallty working?</p>
           <button
@@ -116,7 +123,9 @@ class App extends Component {
           {persons}
 
         </div>
+
      
+
 
     );
 
