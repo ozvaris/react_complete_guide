@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+
+
 import Person from './Person/Person'
 
 class App extends Component {
@@ -65,7 +67,9 @@ class App extends Component {
       font: 'white',
       border: '1px solid blue',
       padding: '8px',
+
       
+
 
     };
 
@@ -88,7 +92,9 @@ class App extends Component {
       )
 
       style.backgroundColor = 'red';
+
     
+
 
     }
 
@@ -106,7 +112,9 @@ class App extends Component {
 
     return (
 
+
     
+
         <div className="App">
           <h1>Hi, I'm React App</h1>
           <p className={classes.join(' ')}>This is reallty working?</p>
@@ -116,7 +124,9 @@ class App extends Component {
           {persons}
 
         </div>
+
      
+
 
     );
 
