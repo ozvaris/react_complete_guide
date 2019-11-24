@@ -1,21 +1,7 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import styled from 'styled-components'
 import Person from './Person/Person'
 
-const StyledButton = styled.button`
-      background-color: ${props => props.show ? 'red' : 'green'};
-      color: white;
-      font: inherit;
-      border: 1px solid blue;
-      padding: 8px;
-      cursor: pointer;
-      
-      &:hover {
-        background-color: ${props => props.show ? 'salmon' : 'lightgreen'};
-        color: black;
-      }
-`;
 
 
 class App extends Component {
@@ -132,9 +118,9 @@ class App extends Component {
 
           <h1>Hi, I'm React App</h1>
           <p className={Assignedclasses.join(' ')}>This is reallty working?</p>
-          <StyledButton show={this.state.showPersons} onClick={this.tooglePersonHandler}>
+          <button className={classes.button} onClick={this.tooglePersonHandler}>
             Toogle Person
-          </StyledButton>
+          </button>
           {persons}
 
         </div>
